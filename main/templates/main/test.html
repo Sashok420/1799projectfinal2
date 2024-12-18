@@ -1,0 +1,131 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+    <h2>Тест по пройденному материалу</h2>
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="flag-question">
+            <label>Вопрос 1: В какой стране празднуют день блинов?</label><br>
+            <div class="flag-item">
+                <label for="q1_1"><input type="radio" name="question_1" value="Россия" id="q1_1"></label>
+                <img src="{% static 'main/images/flags/russia.png' %}" alt="Флаг России">
+            </div>
+            <div class="flag-item">
+                <label for="q1_2"><input type="radio" name="question_1" value="Китай" id="q1_2"></label>
+                <img src="{% static 'main/images/flags/china.png' %}" alt="Флаг Китая">
+            </div>
+            <div class="flag-item">
+                <label for="q1_3"><input type="radio" name="question_1" value="Австрия" id="q1_3"></label>
+                <img src="{% static 'main/images/flags/austria.png' %}" alt="Флаг Австрии">
+            </div>
+        </div>
+
+        <div class="flag-question">
+            <label>Вопрос 2: В какой стране любовь к пиву - главная национальная традиция?</label><br>
+            <div class="flag-item">
+                <label for="q2_1"><input type="radio" name="question_2" value="Япония" id="q2_1"></label>
+                <img src="{% static 'main/images/flags/japan.png' %}" alt="Флаг Японии">
+            </div>
+            <div class="flag-item">
+                <label for="q2_2"><input type="radio" name="question_2" value="Италия" id="q2_2"></label>
+                <img src="{% static 'main/images/flags/italy.png' %}" alt="Флаг Италии">
+            </div>
+            <div class="flag-item">
+                <label for="q2_3"><input type="radio" name="question_2" value="Германия" id="q2_3"></label>
+                <img src="{% static 'main/images/flags/germany.png' %}" alt="Флаг Германии">
+            </div>
+        </div>
+
+        <div class="flag-question">
+            <label>Вопрос 3: В какой стране есть день, когда ты безнаказанно можешь облить прохожего краской?</label><br>
+            <div class="flag-item">
+                <label for="q3_1"><input type="radio" name="question_3" value="Исландия" id="q3_1"></label>
+                <img src="{% static 'main/images/flags/iceland.png' %}" alt="Флаг Исландии">
+            </div>
+            <div class="flag-item">
+                <label for="q3_2"><input type="radio" name="question_3" value="Индия" id="q3_2"></label>
+                <img src="{% static 'main/images/flags/india.png' %}" alt="Флаг Индии">
+            </div>
+            <div class="flag-item">
+                <label for="q3_3"><input type="radio" name="question_3" value="Франция" id="q3_3"></label>
+                <img src="{% static 'main/images/flags/france.png' %}" alt="Флаг Франции">
+            </div>
+        </div>
+
+        <div class="flag-question">
+            <label>Вопрос 4: В какой стране проходит самый зелёный праздник?</label><br>
+            <div class="flag-item">
+                <label for="q4_1"><input type="radio" name="question_4" value="Япония" id="q4_1"></label>
+                <img src="{% static 'main/images/flags/japan.png' %}" alt="Флаг Японии">
+            </div>
+            <div class="flag-item">
+                <label for="q4_2"><input type="radio" name="question_4" value="Ирландия" id="q4_2"></label>
+                <img src="{% static 'main/images/flags/ireland.png' %}" alt="Флаг Ирландии">
+            </div>
+            <div class="flag-item">
+                <label for="q4_3"><input type="radio" name="question_4" value="Россия" id="q4_3"></label>
+                <img src="{% static 'main/images/flags/russia.png' %}" alt="Флаг России">
+            </div>
+        </div>
+
+        <div class="flag-question">
+            <label>Вопрос 5: В какой стране придумали главного противника санта клаусу?</label><br>
+            <div class="flag-item">
+                <label for="q5_1"><input type="radio" name="question_5" value="Китай" id="q5_1"></label>
+                <img src="{% static 'main/images/flags/china.png' %}" alt="Флаг Китая">
+            </div>
+            <div class="flag-item">
+                <label for="q5_2"><input type="radio" name="question_5" value="Италия" id="q5_2"></label>
+                <img src="{% static 'main/images/flags/italy.png' %}" alt="Флаг Италии">
+            </div>
+            <div class="flag-item">
+                <label for="q5_3"><input type="radio" name="question_5" value="Австрия" id="q5_3"></label>
+                <img src="{% static 'main/images/flags/austria.png' %}" alt="Флаг Австрии">
+            </div>
+        </div>
+
+        <button type="submit" id="submit-button" disabled>Ответить</button>
+
+        {% if result %}
+            <p class="result-message">Ваш результат: {{ result }}/5</p>
+        {% endif %}
+    </form>
+
+    <script>
+        const radioGroups = document.querySelectorAll('.flag-question');
+        const submitButton = document.getElementById('submit-button');
+
+        function checkAnswers() {
+            let allAnswered = true;
+
+            radioGroups.forEach(group => {
+                const inputs = group.querySelectorAll('input[type="radio"]');
+                const isAnswered = Array.from(inputs).some(input => input.checked);
+                if (!isAnswered) {
+                    allAnswered = false;
+                }
+            });
+
+            submitButton.disabled = !allAnswered;
+        }
+
+        document.querySelectorAll('input[type="radio"]').forEach(input => {
+            input.addEventListener('change', checkAnswers);
+        });
+
+        checkAnswers();
+    </script>
+
+    <script>
+    const testCompleted = {{ test_completed|yesno:"true,false" }};
+    if (testCompleted) {
+        document.querySelectorAll('input[type="radio"]').forEach(input => {
+            input.disabled = true;
+        });
+        document.querySelector('button[type="submit"]').disabled = true;
+    }
+</script>
+
+{% endblock %}

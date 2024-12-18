@@ -1,0 +1,44 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<h2>Традиции и ремёсла итальянских народов</h2>
+<div class="index-container">
+    <div class="welcome-section">
+        <h2>Народы Италии</h2>
+        <p>
+            Итальянцы имеют богатое культурное наследие, а их диалекты и кулинарные традиции сильно различаются от региона к региону.
+        </p>
+        <h2>Традиции</h2>
+        <p>
+            Итальянская кухня — это сердце традиций. Пицца из Неаполя, паста из Рима и сыры, такие как пармезан и горгонзола, стали символами страны.
+        </p>
+        <p>
+            Одним из известных праздников является Карнавал в Венеции. Люди надевают роскошные костюмы и маски, а улицы города заполняются музыкой и танцами.
+        </p>
+        <p>
+            Ещё одна особенность культуры — долгие семейные ужины. Итальянцы уделяют большое внимание еде, готовя её из свежих местных ингредиентов.
+        </p>
+        {% load static %}
+        <div class="image-row">
+            <img src="{% static 'main/images/PNG_po_teme/pt25.png' %}" class="image-class">
+            <img src="{% static 'main/images/PNG_po_teme/pt26.png' %}" class="image-class">
+            <img src="{% static 'main/images/PNG_po_teme/pt27.png' %}" class="image-class">
+        </div>
+        <h2>Ремёсла</h2>
+        <p>
+            Венеция известна своим муранским стеклом и кружевами с острова Бурано.
+        </p>
+        <p>
+            Флорентийские мастера славятся кожаными изделиями и золотыми украшениями.
+        </p>
+        <p>
+            Традиция производства мозаик восходит к эпохе Древнего Рима и активно сохраняется в современных мастерских.
+        </p>
+        <div class="image-row">
+            <img src="{% static 'main/images/PNG_po_teme/pt28.png' %}" class="image-class">
+            <img src="{% static 'main/images/PNG_po_teme/pt29.png' %}" class="image-class">
+            <img src="{% static 'main/images/PNG_po_teme/pt30.png' %}" class="image-class">
+        </div>
+    </div>
+</div>
+{% endblock %}

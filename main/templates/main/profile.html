@@ -1,0 +1,17 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <h2 class="profile-title">Профиль</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3 class="profile-info">Ник: {{ user.username }}</h3>
+        <h3 class="profile-info">Оценка за тест: {{ user.test_score|default:""}}/5</h3>
+        <a href="{% url 'logout' %}" class="button">Выйти</a>
+        <a href="{% url 'password_change' %}" class="button">Сменить пароль</a>
+        <p>_______________________________________________</p>
+        <label for="avatar">Измените фото профиля:</label>
+        <input type="file" name="avatar" id="avatar" accept="image/*">
+        <button type="submit">Изменить аватар</button>
+    </form>
+
+{% endblock %}

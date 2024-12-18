@@ -1,0 +1,40 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        <h2>Регистрация</h2>
+
+        <label for="{{ form.username.id_for_label }}">Никнейм</label>
+        <input type="text" name="username" id="{{ form.username.id_for_label }}" value="{{ form.username.value|default:'' }}">
+        {% if form.username.errors %}
+            <div class="error-message">
+                {% for error in form.username.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <label for="{{ form.password1.id_for_label }}">Пароль</label>
+        <input type="password" name="password1" id="{{ form.password1.id_for_label }}">
+        {% if form.password1.errors %}
+            <div class="error-message">
+                {% for error in form.password1.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <label for="{{ form.password2.id_for_label }}">Подтверждение пароля</label>
+        <input type="password" name="password2" id="{{ form.password2.id_for_label }}">
+        {% if form.password2.errors %}
+            <div class="error-message">
+                {% for error in form.password2.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <button type="submit">Зарегистрироваться</button>
+    </form>
+{% endblock %}
